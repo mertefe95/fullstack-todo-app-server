@@ -17,7 +17,7 @@ server.register(require('fastify-cors'), {
 })
 
 
-const PORT = process.env.PORT || '0.0.0.0';
+const PORT = process.env.PORT || 8080;
 
 server.listen(process.env.PORT || '0.0.0.0', (err: any, address:any) => {
   if (err) {
