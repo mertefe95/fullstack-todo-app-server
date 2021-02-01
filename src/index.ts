@@ -17,9 +17,9 @@ server.register(require('fastify-cors'), {
 })
 
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || '0.0.0.0';
 
-server.listen(process.env.PORT || 8080, (err: any, address:any) => {
+server.listen(process.env.PORT || '0.0.0.0', (err: any, address:any) => {
   if (err) {
     console.error(err)
     process.exit(1)
