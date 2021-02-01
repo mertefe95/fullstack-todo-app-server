@@ -9,13 +9,14 @@
   },
   "scripts": {
     "serve": "npm run tsc && node dist/index.js",
-    "start": "cd ./src && nodemon index.ts",
+    "start": "npm run serve",
     "client": "cd ../client && npm start",
     "ts-start": "cd ./src && nodemon index.ts",
     "ts-watch": "cd ./src && tsc -w",
     "dev": "concurrently \"npm run ts-start\" \"npm run client\"",
     "tsc": "tsc",
-    "watch-ts": "tsc -w"
+    "watch-ts": "tsc -w",
+    "postinstall": "npm run tsc"
   },
   "keywords": [],
   "author": "",
