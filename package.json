@@ -15,8 +15,7 @@
     "ts-watch": "cd ./src && tsc -w",
     "dev": "concurrently \"npm run ts-start\" \"npm run client\"",
     "tsc": "tsc",
-    "watch-ts": "tsc -w",
-    "postinstall": "npm run tsc"
+    "watch-ts": "tsc -w"
   },
   "keywords": [],
   "author": "",
