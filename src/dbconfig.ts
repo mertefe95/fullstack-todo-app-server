@@ -1,7 +1,7 @@
 const config = {
   user: 'MertAdmin',
   password: 'Admin12345',
-  server: '127.0.0.1',
+  server: 'https://cryptic-harbor-96739.herokuapp.com/',
   database: 'Blog',
   options: {
     trustedConnection: true,
