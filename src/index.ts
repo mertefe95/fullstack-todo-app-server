@@ -1,7 +1,7 @@
 import fastify from 'fastify';
 import { UserRoute } from "./routes/UserRoute";
 import { PostRoute } from "./routes/PostRoute";
-import fastify-cors from "fastify-cors";
+
 
 
 const server = fastify();
@@ -9,9 +9,7 @@ const server = fastify();
 
 server.register(UserRoute);
 server.register(PostRoute);
-server.register(fastify-cors, {
-  
-})
+
 
 const PORT = process.env.PORT || 8080;
 
