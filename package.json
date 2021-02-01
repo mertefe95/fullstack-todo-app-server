@@ -12,7 +12,7 @@
     "client": "cd ../client && npm start",
     "ts-start": "cd ./src && nodemon index.ts",
     "ts-watch": "cd ./src && tsc -w",
-    "dev": "concurrently tsc -p \"npm run ts-watch\" \"npm run ts-start\" \"npm run client\"",
+    "dev": "concurrently tsc -p \"npm run ts-start\" \"npm run client\"",
     "tsc": "tsc",
     "postinstall": "npm run tsc"
   },
