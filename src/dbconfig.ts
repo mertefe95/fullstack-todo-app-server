@@ -3,10 +3,10 @@ const config = {
   password: 'Admin12345',
   server: 'MERT\\MSSQLSERVER01',
   database: 'Blog',
-  localhost: '0.0.0.0',
   options: {
     trustedConnection: true,
     enableArithAort: true,
+    instanceName: `MSSQLSERVER01`,
     parseJSON:true
   },
   pool: {
