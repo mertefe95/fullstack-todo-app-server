@@ -1,5 +1,4 @@
 import { getAllPosts, getPost, addPost, deletePost, updatePost } from "../post_operations";
-import { v4 as uuidv4 } from 'uuid';
 
 async function PostRoute (fastify: any, options: any) {
   

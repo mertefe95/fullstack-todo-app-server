@@ -1,7 +1,7 @@
 import { getAllUsers, getUser, addUser, getUserByEmail, getUserByUsername } from "../user_operations";
-import validator from "validator";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
+import {validator} from "validator";
+import {bcrypt} from "bcryptjs";
+import {jwt} from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 
