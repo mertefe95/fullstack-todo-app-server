@@ -47,7 +47,6 @@ async function UserRoute (fastify: any, options: any) {
   const userRes = await getUserByUsername(username);
   
 
-  console.log(process.env.SECRET_KEY)
 
 
   if (emailRes.length) {
