@@ -8,7 +8,7 @@
     "npm": "7.x.x"
   },
   "scripts": {
-    "serve": "node dist/index.js",
+    "serve": "npm run tsc && node dist/index.js",
     "start": "npm run serve",
     "client": "cd ../client && npm start",
     "ts-start": "cd ./src && nodemon index.ts",
