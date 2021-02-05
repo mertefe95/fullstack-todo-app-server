@@ -1,11 +1,9 @@
-import config from "./dbconfig";
-const sql = require('mssql')
+import pool from "./db";
 
 async function getAllUsers(){
   try {
-    let pool = await sql.connect(config);
-    let users = await pool.request().query("SELECT * from users");
-    return users.recordsets;
+    const users = await pool.query("SELECT * FROM users");
+    return users.rows;
   }
   catch (error) {
     console.log(error)
@@ -14,11 +12,10 @@ async function getAllUsers(){
 
 async function getUser(id:any){
   try {
-    let pool = await sql.connect(config);
-    let user = await pool.request()
-    .input('input_parameter', sql.Int, id)
-    .query("SELECT * from users where id = @input_parameter");
-    return user.recordsets[0];
+
+    const user = await pool
+    .query(`SELECT * from users where id = ${id}`);
+    return user.rows;
   }
   catch (error) {
     console.log(error)
@@ -28,15 +25,12 @@ async function getUser(id:any){
 async function addUser(user:any) {
   try {
 
-    let pool = await sql.connect(config);
-    let insertUser = await pool.request()
-      .input('username', sql.NVarChar, user.username)
-      .input('email', sql.NVarChar, user.email)
-      .input('password', sql.NVarChar, user.hashedPassword)
+
+    const insertUser = await pool
       .query(`INSERT INTO users (username, email, password) 
             VALUES 
-            (@username, @email, @password)`)
-      return insertUser.recordsets;
+            ('${user.username}', '${user.email}', '${user.hashedPassword}')`)
+      return insertUser.rows;
   }
   catch (err) {
     console.log(err);
@@ -46,11 +40,9 @@ async function addUser(user:any) {
 
 async function getUserByUsername(username:any) {
   try {
-    let pool = await sql.connect(config);
-    let user = await pool.request()
-      .input('username', sql.NVarChar, username)
-      .query("SELECT * from users where username = @username");
-      return user.recordsets[0];
+    const user = await pool
+      .query(`SELECT * from users WHERE username = '${username}'`);
+      return user.rows;
   } catch (error) {
     console.log(error)
   }
@@ -58,16 +50,13 @@ async function getUserByUsername(username:any) {
 
 async function getUserByEmail(email:any) {
   try {
-    let pool = await sql.connect(config);
-    let user = await pool.request()
-      .input('email', sql.NVarChar, email)
-      .query("SELECT * from users where email = @email");
-      return user.recordsets[0];
+    const user = await pool
+      .query(`SELECT * from users WHERE email = '${email}'`);
+      return user.rows;
   } catch (error) {
     console.log(error)
   }
 }
-
 
 
 export { getAllUsers, getUser, addUser, getUserByUsername, getUserByEmail  };

@@ -1,25 +1,23 @@
 import fastify from 'fastify';
 import { UserRoute } from "./routes/UserRoute";
-import { PostRoute } from "./routes/PostRoute";
-
-
+import { TodoRoute } from "./routes/TodoRoute";
+import pool from "./db";
 
 const server = fastify();
 
 
 server.register(UserRoute);
-server.register(PostRoute);
+server.register(TodoRoute);
 
 server.register(require('fastify-cors'), {
-  origin: /\*/,
-  allowedHeaders: ['Origin', 'X-Requested-With', 'Accept', 'Content-Type', 'Authorization'],
-  methods: ['GET', 'PUT', 'PATCH', 'POST', 'DELETE']
+
 })
 
 
-const PORT = process.env.PORT || 8080;
 
-server.listen(process.env.PORT || '0.0.0.0', (err: any, address:any) => {
+const PORT = process.env.PORT || 8080;
+const host = '0.0.0.0';
+server.listen(PORT, host, (err: any, address:any) => {
   if (err) {
     console.error(err)
     process.exit(1)

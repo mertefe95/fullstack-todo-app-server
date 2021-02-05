@@ -5,27 +5,27 @@ dotenv.config();
 
 console.log(process.env.SECRET_TOKEN)
 
-const auth = (req: any, res: any, next: any) => {
+const auth = (request: any, reply: any, next: any) => {
   try {
-    const token = req.header("x-auth-token")
+    const token = request.header["x-auth-token"]
 
     if(!token) {
-      return res
+      return reply
         .status(401)
-        .json({ msg: "Token not found. Authorization has been denied." })
+        .send({ msg: "Token not found. Authorization has been denied." })
     }
 
     const isVerified = jwt.verify(token, process.env.SECRET_TOKEN!)
     if (!isVerified) {
-      return res
+      return reply
         .status(400)
-        .json({ msg: "Unsuccesful token verification. Authentication denied." });
+        .send({ msg: "Unsuccesful token verification. Authentication denied." });
     }
 
 
     next();
 } catch (err) {
-  return res
+  return reply
     .status(500)
     .send(err)
 }}

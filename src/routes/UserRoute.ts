@@ -2,17 +2,21 @@ import { getAllUsers, getUser, addUser, getUserByEmail, getUserByUsername } from
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwt  =  require("jsonwebtoken");
-import dotenv from "dotenv";
-dotenv.config();
-
-
+const path = require('path');
+require('dotenv').config({
+  path: `${__dirname}/../../.env`
+});
 
 async function UserRoute (fastify: any, options: any) {
-  fastify.get('/users', async (request: Request, reply: any) => {
+  fastify.get('/users', async (request: any, reply: any) => {
+    try {
     getAllUsers().then(result => {
 
-      return reply.status(200).send(result[0]);
+      return reply.status(200).send(result);
     })
+  } catch (e) {
+    return reply.status(500).send(e);
+  }
   })
 
   fastify.get('/users/:id', async (request: any, reply: any) => {
@@ -45,8 +49,6 @@ async function UserRoute (fastify: any, options: any) {
    
   const emailRes = await getUserByEmail(email);
   const userRes = await getUserByUsername(username);
-  
-
 
 
   if (emailRes.length) {
@@ -55,10 +57,9 @@ async function UserRoute (fastify: any, options: any) {
     return reply.status(400).send({ msg: 'The username is already being used, please enter a different username.' })
   }
 
-  let theSalt = await bcrypt.genSalt(10);
+  const theSalt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, theSalt)
-
-  let user = {
+  const user = {
     username,
     email,
     hashedPassword
@@ -81,7 +82,8 @@ async function UserRoute (fastify: any, options: any) {
       }
 
       const userRes = await getUserByEmail(email);
-      if (!userRes) {
+
+      if (!userRes.length) {
         return reply.status(400).send({ msg: 'User with this email does not exist.' })
       }
 
@@ -104,6 +106,30 @@ async function UserRoute (fastify: any, options: any) {
 
   })
 
+fastify.post('/users/tokenIsValid', async (request: any, reply: any) => {
+  try {
+
+     const token = request.headers['x-auth-token'];
+   console.log(token);
+   
+     if (!token) return reply.status(400).send({ msg: "Not existing." });
+
+     const verified = await jwt.verify(token, process.env.SECRET_KEY);
+     if (!verified) return reply.status(400).send(false);
+
+
+     const user = await getUser(verified.id);
+     if (!user) return reply.send(false);
+
+     return reply.status(200).send({
+       username: user[0].username,
+       id: user[0].id,
+       email: user[0].email
+     })
+   } catch (err) {
+     return reply.status(500).send({ msg: err.message });
+   }
+})
 
 }
 
