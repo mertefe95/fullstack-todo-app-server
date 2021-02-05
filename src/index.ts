@@ -10,8 +10,8 @@ server.register(TodoRoute);
 
 server.register(require("fastify-cors"), {});
 
-const PORT = process.env.PORT || 5432;
-const host = "ec2-52-6-178-202.compute-1.amazonaws.com";
+const PORT = process.env.PORT || 8080;
+const host = "0.0.0.0";
 server.listen(PORT, host, (err: any, address: any) => {
   if (err) {
     console.error(err);
