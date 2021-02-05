@@ -69,7 +69,7 @@ async function TodoRoute(fastify: any, options: any) {
     } catch (err) {
       return reply.status(500).send(err.message);
     }
-  })
+  });
 
   fastify.delete("/todos/:id", async (request: any, reply: any) => {
     try {
