@@ -16,8 +16,7 @@
     "dev": "concurrently \"npm run ts-start\" \"npm run client\"",
     "tsc": "tsc",
     "lint:fix": "eslint . --fix",
-    "watch-ts": "tsc -w",
-    "postinstall": "npm run tsc"
+    "watch-ts": "tsc -w"
   },
   "keywords": [],
   "author": "",
