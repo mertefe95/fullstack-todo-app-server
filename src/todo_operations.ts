@@ -23,7 +23,7 @@ async function addTodo(newTodo: any) {
     const insertTodo = await pool.query(`INSERT INTO todos (title, text, author, userId) 
             values 
             ('${newTodo.title}', '${newTodo.text}', '${newTodo.author}', ${newTodo.userId})`);
-    return insertTodo.rows[0];
+    return insertTodo.rows;
   } catch (err) {
     console.log(err);
   }
