@@ -10,9 +10,9 @@ server.register(TodoRoute);
 
 server.register(require("fastify-cors"), {});
 
-const PORT = process.env.PORT || 8080;
-const host = "0.0.0.0";
-server.listen(PORT, host, (err: any, address: any) => {
+const PORT = process.env.PORT || 5432;
+
+server.listen(PORT, (err: any, address: any) => {
   if (err) {
     console.error(err);
     process.exit(1);
