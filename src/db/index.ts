@@ -7,7 +7,7 @@ user: 'postgres',
   port: 5432,
 )
 module.exports = {
-  query: (text, params, callback) => {
+  query: (text: any, params: any, callback: any) => {
     return pool.query(text, params, callback)
   },
 }
