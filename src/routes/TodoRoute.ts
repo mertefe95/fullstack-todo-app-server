@@ -59,6 +59,18 @@ async function TodoRoute(fastify: any, options: any) {
     }
   });
 
+  fastify.put("/todos/:id", async (request: any, reply: any) => {
+    try {
+      const { title, text } = request.body;
+
+      updateTodo(request.params.id, title, text).then((result) => {
+        return reply.status(200).send({ msg: "Todo succesfully updated." });
+      });
+    } catch (err) {
+      return reply.status(500).send(err.message);
+    }
+  })
+
   fastify.delete("/todos/:id", async (request: any, reply: any) => {
     try {
       deleteTodo(request.params.id).then((result) => {
