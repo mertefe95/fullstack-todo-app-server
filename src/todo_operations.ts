@@ -16,7 +16,7 @@ async function getAllTodos() {
 async function getTodo(id: any) {
   try {
     const todo = await pool.query(`SELECT * from todos where id = ${id}`);
-    return todo.rows[0];
+    return todo.rows;
   } catch (error) {
     console.log(error);
   }
@@ -39,7 +39,7 @@ async function addTodo(newTodo: any) {
 async function deleteTodo(id: number) {
   try {
     const deletedTodo = await pool.query(`DELETE FROM todos WHERE id = ${id}`);
-    return deletedTodo.rows[0];
+    return deletedTodo.rows;
   } catch (err) {
     console.log(err);
   }
@@ -50,7 +50,7 @@ async function updateTodo(id: number, title: string, text: string) {
     const updateTodo = await pool.query(
       `UPDATE todos SET title = '${title}', text = '${text}' WHERE id = ${id}`
     );
-    return updateTodo.rows[0];
+    return updateTodo.rows;
   } catch (err) {
     console.log(err);
   }
