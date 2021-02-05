@@ -31,7 +31,7 @@ async function TodoRoute(fastify: any, options: any) {
 
   fastify.post("/todos/add", async (request: any, reply: any) => {
     try {
-      const { title, text, author, userId } = request.body;
+      const { title, text, userId } = request.body;
 
       if (!title) {
         return reply.status(400).send({ msg: "Please enter a title." });
@@ -47,7 +47,7 @@ async function TodoRoute(fastify: any, options: any) {
       const newTodo = {
         title: title,
         text: text,
-        author: author,
+        author: user.username,
         userId: userId,
       };
 
