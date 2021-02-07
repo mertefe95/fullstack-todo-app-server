@@ -1,5 +1,11 @@
 import pool from "./dbproduction";
 
+interface userDetails {
+  username: string;
+  email: string;
+  hashedPassword: string;
+}
+
 async function getAllUsers() {
   try {
     const users = await pool.query("SELECT * FROM users");
@@ -9,7 +15,7 @@ async function getAllUsers() {
   }
 }
 
-async function getUser(id: any) {
+async function getUser(id: number) {
   try {
     const user = await pool.query(`SELECT * from users where id = ${id}`);
     return user.rows;
@@ -18,7 +24,7 @@ async function getUser(id: any) {
   }
 }
 
-async function addUser(user: any) {
+async function addUser(user: userDetails) {
   try {
     const insertUser = await pool.query(`INSERT INTO users (username, email, password) 
             VALUES 
@@ -29,7 +35,7 @@ async function addUser(user: any) {
   }
 }
 
-async function getUserByUsername(username: any) {
+async function getUserByUsername(username: string) {
   try {
     const user = await pool.query(
       `SELECT * from users WHERE username = '${username}'`
@@ -40,7 +46,7 @@ async function getUserByUsername(username: any) {
   }
 }
 
-async function getUserByEmail(email: any) {
+async function getUserByEmail(email: string) {
   try {
     const user = await pool.query(
       `SELECT * from users WHERE email = '${email}'`

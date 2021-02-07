@@ -3,6 +3,7 @@ import { UserRoute } from "./routes/UserRoute";
 import { TodoRoute } from "./routes/TodoRoute";
 import pool from "./db";
 
+
 const server = fastify();
 
 server.register(UserRoute);

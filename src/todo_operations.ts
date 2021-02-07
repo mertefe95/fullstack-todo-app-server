@@ -1,19 +1,22 @@
 import pool from "./dbproduction";
 
+interface newTodoInterface {
+  title: Text;
+  text: Text;
+  author: Text;
+  userId: number;
+}
+
 async function getAllTodos() {
   try {
-
     const posts = await pool.query("SELECT * from todos");
-    
     return posts.rows;
-
   } catch (error) {
     console.log(error);
-  
   }
 }
 
-async function getTodo(id: any) {
+async function getTodo(id: number) {
   try {
     const todo = await pool.query(`SELECT * from todos where id = ${id}`);
     return todo.rows;
@@ -22,17 +25,15 @@ async function getTodo(id: any) {
   }
 }
 
-async function addTodo(newTodo: any) {
+async function addTodo(newTodo: newTodoInterface) {
   try {
-
     const insertTodo = await pool.query(`INSERT INTO todos (title, text, author, userId) 
             values 
             ('${newTodo.title}', '${newTodo.text}', '${newTodo.author}', ${newTodo.userId})`);
-            
+
     return insertTodo.rows;
   } catch (err) {
     console.log(err);
-
   }
 }
 
