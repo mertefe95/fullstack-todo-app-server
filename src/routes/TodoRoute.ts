@@ -8,6 +8,13 @@ import {
 import { getUser } from "../user_operations";
 import { auth } from "../middleware/auth";
 
+interface newTodoInterface {
+  title: string;
+  text: string;
+  author: string;
+  userId: number;
+}
+
 async function TodoRoute(fastify: any, options: any) {
   fastify.get("/todos", async (request: any, reply: any) => {
     try {
@@ -44,11 +51,11 @@ async function TodoRoute(fastify: any, options: any) {
       const user = await getUser(userId);
       console.log(user);
 
-      const newTodo = {
-        title: title,
-        text: text,
-        author: author,
-        userId: userId,
+      const newTodo: newTodoInterface = {
+        title,
+        text,
+        author,
+        userId,
       };
 
       addTodo(newTodo).then((result) => {

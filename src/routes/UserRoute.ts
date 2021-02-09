@@ -13,8 +13,14 @@ require("dotenv").config({
   path: `${__dirname}/../../.env`,
 });
 
+interface userInfo {
+  username: string;
+  email: string;
+  hashedPassword: string;
+}
+
 async function UserRoute(fastify: any, options: any) {
-  fastify.get("/users", async (request: any, reply: any) => {
+  fastify.get("/users", async (request: any, opts: any, reply: any) => {
     try {
       getAllUsers().then((result) => {
         return reply.status(200).send(result);
@@ -76,7 +82,7 @@ async function UserRoute(fastify: any, options: any) {
 
     const theSalt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, theSalt);
-    const user = {
+    const user: userInfo = {
       username,
       email,
       hashedPassword,

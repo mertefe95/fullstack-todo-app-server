@@ -1,9 +1,9 @@
 import pool from "./dbproduction";
 
 interface newTodoInterface {
-  title: Text;
-  text: Text;
-  author: Text;
+  title: string;
+  text: string;
+  author: string;
   userId: number;
 }
 

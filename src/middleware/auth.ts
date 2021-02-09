@@ -3,8 +3,6 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-console.log(process.env.SECRET_TOKEN);
-
 const auth = (request: any, reply: any, next: any) => {
   try {
     const token = request.header["x-auth-token"];

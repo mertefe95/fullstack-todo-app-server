@@ -1,10 +1,10 @@
 import fastify from "fastify";
 import { UserRoute } from "./routes/UserRoute";
 import { TodoRoute } from "./routes/TodoRoute";
-import pool from "./db";
 
+import { FastifyInstance } from "fastify";
 
-const server = fastify();
+const server: FastifyInstance = fastify();
 
 server.register(UserRoute);
 server.register(TodoRoute);
