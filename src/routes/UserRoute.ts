@@ -5,6 +5,7 @@ import {
   getUserByEmail,
   getUserByUsername,
 } from "../user_operations";
+import { FastifyReply, FastifyRequest } from "fastify";
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -12,7 +13,7 @@ const path = require("path");
 require("dotenv").config({
   path: `${__dirname}/../../.env`,
 });
-
+import { IncomingMessage, ServerResponse } from "http";
 interface userInfo {
   username: string;
   email: string;

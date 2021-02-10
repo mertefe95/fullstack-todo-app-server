@@ -4,10 +4,20 @@ import { TodoRoute } from "./routes/TodoRoute";
 
 import { FastifyInstance } from "fastify";
 
-const server: FastifyInstance = fastify();
+const server = fastify();
 
 server.register(UserRoute);
 server.register(TodoRoute);
+
+
+server.register(require('fastify-swagger'), {
+  mode: 'static',
+  specification: {
+    path: '../../server/src/swagger.yaml'
+  },
+  exposeRoute: true
+  })
+
 
 server.register(require("fastify-cors"), {});
 
