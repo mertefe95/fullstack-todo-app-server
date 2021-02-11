@@ -2,7 +2,6 @@ import fastify from "fastify";
 import { UserRoute } from "./routes/UserRoute";
 import { TodoRoute } from "./routes/TodoRoute";
 
-import { FastifyInstance } from "fastify";
 
 const server = fastify();
 
