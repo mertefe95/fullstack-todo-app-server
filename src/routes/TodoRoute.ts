@@ -6,9 +6,6 @@ import {
   updateTodo,
 } from "../todo_operations";
 import { getUser } from "../user_operations";
-import { auth } from "../middleware/auth";
-
-
 
 
 
@@ -19,33 +16,9 @@ interface newTodoInterface {
   userId: number;
 }
 
-const responseSchema = {
-  response: {
-    200: {
-        type: 'object',
-        
-        items: {
-          type: 'array',
-          properties: {
-            id: { type: 'number'},
-            name: { type: 'string'},
-            parentId: { type: 'number' }
-        }
-        }
-        
-    }
-}
-}
-
-
-const schema = {
-
-  response: responseSchema
-}
-
 
 async function TodoRoute(fastify: any, options: any) {
-  fastify.get("/todos", {schema}, async (request: any, reply: any) => {
+  fastify.get("/todos", async (request: any, reply: any) => {
     try {
       getAllTodos().then((result) => {
         return reply.status(200).send(result);
@@ -55,7 +28,7 @@ async function TodoRoute(fastify: any, options: any) {
     }
   });
 
-  fastify.get("/todos/:id", { schema }, async (request: any, reply: any) => {
+  fastify.get("/todos/:id", async (request: any, reply: any) => {
     try {
       getTodo(request.params.id).then((result) => {
         return reply.status(200).send(result);
@@ -95,7 +68,7 @@ async function TodoRoute(fastify: any, options: any) {
     }
   });
 
-  fastify.put("/todos/:id", { schema }, async (request: any, reply: any) => {
+  fastify.put("/todos/:id", async (request: any, reply: any) => {
     try {
       const { title, text } = request.body;
 
