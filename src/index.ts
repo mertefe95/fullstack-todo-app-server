@@ -10,13 +10,13 @@ server.register(TodoRoute);
 server.register(require("fastify-swagger"), {
   mode: "static",
   specification: {
-    path: "../src/swagger.yaml",
+    path: "../../server/swagger.yaml",
   },
   exposeRoute: true,
 });
 
 server.register(require("fastify-cors"), {
-  methods: ['GET', 'PUT', 'POST', 'DELETE']
+
 });
 
 const PORT = process.env.PORT || 8080;
