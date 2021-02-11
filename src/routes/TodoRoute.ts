@@ -7,15 +7,12 @@ import {
 } from "../todo_operations";
 import { getUser } from "../user_operations";
 
-
-
 interface newTodoInterface {
   title: string;
   text: string;
   author: string;
   userId: number;
 }
-
 
 async function TodoRoute(fastify: any, options: any) {
   fastify.get("/todos", async (request: any, reply: any) => {
