@@ -10,7 +10,7 @@ server.register(TodoRoute);
 server.register(require("fastify-swagger"), {
   mode: "static",
   specification: {
-    path: "../../server/src/swagger.yaml",
+    path: "../src/swagger.yaml",
   },
   exposeRoute: true,
 });
