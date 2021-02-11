@@ -15,7 +15,9 @@ server.register(require("fastify-swagger"), {
   exposeRoute: true,
 });
 
-server.register(require("fastify-cors"), {});
+server.register(require("fastify-cors"), {
+  methods: ['GET', 'PUT', 'POST', 'DELETE']
+});
 
 const PORT = process.env.PORT || 8080;
 const host = "0.0.0.0";
