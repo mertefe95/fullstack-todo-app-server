@@ -7,6 +7,14 @@ const server = fastify();
 server.register(UserRoute);
 server.register(TodoRoute);
 
+server.register(require("fastify-swagger"), {
+  routePrefix: "/documentation",
+  mode: "static",
+  specification: {
+    path: "../../server/swagger.yaml",
+  },
+  exposeRoute: true,
+});
 
 server.register(require("fastify-cors"), {
 
