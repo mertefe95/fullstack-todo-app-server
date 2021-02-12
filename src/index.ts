@@ -7,11 +7,12 @@ const server = fastify();
 
 server.register(UserRoute);
 server.register(TodoRoute);
-console.log(__dirname)
+
+
 server.register(require("fastify-swagger"), {
   mode: "static",
   specification: {
-    path: "./swagger.yaml"
+    path: path.join(__dirname, "./swagger.yaml" )
   },
   exposeRoute: true,
 });
