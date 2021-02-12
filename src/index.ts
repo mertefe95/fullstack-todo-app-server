@@ -1,19 +1,18 @@
 import fastify from "fastify";
 import { UserRoute } from "./routes/UserRoute";
 import { TodoRoute } from "./routes/TodoRoute";
+import path, { dirname } from "path";
 
 const server = fastify();
 
 server.register(UserRoute);
 server.register(TodoRoute);
-
+console.log(__dirname)
 server.register(require("fastify-swagger"), {
-  routePrefix: "/documentation",
   mode: "static",
   specification: {
-    path: "../../server/swagger.yaml",
+    path: "./swagger.yaml"
   },
-  baseDir: '../../server',
   exposeRoute: true,
 });
 
