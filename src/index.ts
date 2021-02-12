@@ -8,18 +8,15 @@ const server = fastify();
 server.register(UserRoute);
 server.register(TodoRoute);
 
-
 server.register(require("fastify-swagger"), {
   mode: "static",
   specification: {
-    path: path.join(__dirname, "../swagger.yaml" )
+    path: path.join(__dirname, "../swagger.yaml"),
   },
   exposeRoute: true,
 });
 
-server.register(require("fastify-cors"), {
-
-});
+server.register(require("fastify-cors"), {});
 
 const PORT = process.env.PORT || 8080;
 const host = "0.0.0.0";
