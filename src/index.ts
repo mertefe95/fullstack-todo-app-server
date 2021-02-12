@@ -13,6 +13,7 @@ server.register(require("fastify-swagger"), {
   specification: {
     path: "../../server/swagger.yaml",
   },
+  baseDir: '../../server',
   exposeRoute: true,
 });
 
